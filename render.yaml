@@ -1,12 +1,9 @@
 services:
   - type: web
-    name: face-recognition-app
+    name: face-recognition
     env: python
-    plan: free
-    buildCommand: pip install -r requirements_deploy.txt
-    startCommand: gunicorn app:app
+    buildCommand: ./install_deps.sh && pip install -r requirements.txt
+    startCommand: gunicorn app:app  # or python app.py if you're not using gunicorn
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: PORT
-        value: 10000
+        value: 3.10.13
