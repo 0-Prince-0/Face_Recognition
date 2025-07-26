@@ -294,8 +294,11 @@ if __name__ == '__main__':
     os.makedirs('templates', exist_ok=True)
     os.makedirs('static', exist_ok=True)
     
-    # Get port from environment variable (for deployment) or default to 8090
+    # Get port from environment variable (Render uses PORT=10000 by default)
     port = int(os.environ.get('PORT', 8090))
     
-    # Run the app
+    # Run the app (Render needs host='0.0.0.0')
     app.run(debug=False, host='0.0.0.0', port=port, threaded=True)
+else:
+    # This is for when running with gunicorn
+    gunicorn_app = app
